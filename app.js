@@ -123,9 +123,8 @@
     tg.setHeaderColor('#0d0d0d');
     tg.setBackgroundColor('#0d0d0d');
 
-    // MainButton оставляем для общего сабмита, но не используем для back
-    tg.MainButton.setParams({ text: 'Отправить', color: '#6633ff', text_color: '#ffffff', is_active: false, is_visible: true });
-    tg.MainButton.onClick(()=>{ const payload = {action:'submit', tab: state.currentTab}; tg.sendData(JSON.stringify(payload)); });
+    // Скрываем MainButton навсегда
+    tg.MainButton.hide();
   }
 
   function qs(sel){ return document.querySelector(sel); }
@@ -146,9 +145,8 @@
       s.setAttribute('aria-hidden', String(!visible));
     });
     if(tg){
-      // На обычных экранах скрываем BackButton и деактивируем MainButton
+      // На обычных экранах скрываем BackButton
       try{ tg.BackButton.hide(); }catch(e){}
-      tg.MainButton.setParams({is_active:false});
     }
     moveTabIndicator();
     
@@ -252,7 +250,6 @@
       try{ tg.BackButton.show(); }catch(e){}
       try{ tg.BackButton.offClick?.(); }catch(e){}
       tg.BackButton.onClick(()=>{ history.back(); });
-      tg.MainButton.setParams({is_active:false});
     }
   }
 
