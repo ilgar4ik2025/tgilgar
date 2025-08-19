@@ -125,6 +125,29 @@
 
     // Скрываем MainButton навсегда
     tg.MainButton.hide();
+    
+    // Добавляем класс для Telegram Web App специфичных стилей
+    document.body.classList.add('telegram-webapp');
+    
+    // Принудительно применяем стили для таббара в Telegram
+    if (tg.platform === 'ios' || tg.platform === 'android') {
+      setTimeout(() => {
+        const tabbar = document.querySelector('.tabbar');
+        const tabs = document.querySelectorAll('.tab');
+        
+        if (tabbar) {
+          tabbar.style.overflow = 'hidden';
+          tabbar.style.contain = 'layout style paint';
+          tabbar.style.isolation = 'isolate';
+        }
+        
+        tabs.forEach(tab => {
+          tab.style.overflow = 'hidden';
+          tab.style.maxHeight = '40px';
+          tab.style.minHeight = '40px';
+        });
+      }, 100);
+    }
   }
 
   function qs(sel){ return document.querySelector(sel); }

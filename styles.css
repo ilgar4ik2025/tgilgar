@@ -8,6 +8,11 @@
   --radius-20:20px;
   --radius-28:28px;
   --radius-30:30px;
+  /* Размеры таббара */
+  --tabbar-height:60px;
+  --tab-height:40px;
+  --tabbar-padding:16px;
+  --tab-margin:2px;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -50,22 +55,31 @@ body{
 .home-image{width:100%;max-width:300px;height:auto;border-radius:20px;margin-top:24px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
 
 .tabbar{
-  height:60px;
+  height:var(--tabbar-height);
   background:var(--bg-2);
   border-radius:20px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:10px 16px;
+  padding:10px var(--tabbar-padding);
   position:relative;
   margin:0 12px 12px 12px;
-  min-height:60px;
+  min-height:var(--tabbar-height);
+  max-height:var(--tabbar-height);
+  overflow:hidden;
+  /* Принудительное обрезание для Telegram */
+  contain:layout style paint;
+  isolation:isolate;
+  /* Дополнительные исправления для iPhone */
+  -webkit-overflow-scrolling:touch;
+  -webkit-transform:translate3d(0,0,0);
+  transform:translate3d(0,0,0);
 }
 
 .tab{
   flex:1;
   min-width:0;
-  height:40px;
+  height:var(--tab-height);
   border-radius:15px;
   background:var(--bg-2);
   color:#000;
@@ -76,7 +90,18 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  margin:0 2px;
+  margin:0 var(--tab-margin);
+  position:relative;
+  z-index:1;
+  /* Принудительное обрезание содержимого */
+  overflow:hidden;
+  /* Исправления для эмодзи в Telegram */
+  line-height:1;
+  vertical-align:middle;
+  text-align:center;
+  /* Фиксированные размеры */
+  min-height:var(--tab-height);
+  max-height:var(--tab-height);
 }
 
 .tab:first-child{margin-left:0}
@@ -167,6 +192,87 @@ body{
   .tabbar{height:50px;min-height:50px}
   .tab{height:36px}
   .tab-indicator{bottom:8px}
+}
+
+/* Специальные стили для Telegram Web App */
+@supports (-webkit-touch-callout: none) {
+  .tabbar {
+    /* iOS Safari специфичные стили */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  .tab {
+    /* Исправляем рендеринг иконок в Telegram */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+}
+
+/* Telegram Web App специфичные исправления */
+.telegram-webapp .tabbar {
+  /* Принудительно обрезаем содержимое */
+  clip-path: inset(0);
+  -webkit-clip-path: inset(0);
+  /* Дополнительные исправления для iPhone */
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  /* Жесткое ограничение размеров */
+  max-height: 60px;
+  min-height: 60px;
+}
+
+.telegram-webapp .tab {
+  /* Принудительное обрезание для эмодзи */
+  clip-path: inset(0);
+  -webkit-clip-path: inset(0);
+  /* Фиксированные размеры */
+  max-height: 40px;
+  min-height: 40px;
+  /* Исправления рендеринга */
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Специальные исправления для iPhone */
+@supports (-webkit-touch-callout: none) {
+  .tabbar {
+    /* iOS специфичные исправления */
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* Принудительное обрезание */
+    clip-path: inset(0);
+    -webkit-clip-path: inset(0);
+    /* Жесткие ограничения */
+    height: var(--tabbar-height) !important;
+    max-height: var(--tabbar-height) !important;
+    min-height: var(--tabbar-height) !important;
+  }
+  
+  .tab {
+    /* iOS специфичные исправления для табов */
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* Принудительное обрезание */
+    clip-path: inset(0);
+    -webkit-clip-path: inset(0);
+    /* Жесткие ограничения */
+    height: var(--tab-height) !important;
+    max-height: var(--tab-height) !important;
+    min-height: var(--tab-height) !important;
+  }
 }
 
 
