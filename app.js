@@ -310,12 +310,17 @@
     const tabs = qsa('.tab');
     const idx = tabs.findIndex(t => t.dataset.tab === state.currentTab);
     if(!indicator || idx < 0) return;
+    
     const tabEl = tabs[idx];
     const tb = tabEl.getBoundingClientRect();
     const pb = tabEl.parentElement.getBoundingClientRect();
+    
+    // Центрируем индикатор относительно активного таба
     const center = tb.left + tb.width/2 - pb.left;
-    const width = 36;
-    indicator.style.left = `${Math.max(12, center - width/2)}px`;
+    const indicatorWidth = window.innerWidth <= 380 ? 32 : window.innerWidth <= 320 ? 28 : 36;
+    
+    indicator.style.left = `${Math.max(16, center - indicatorWidth/2)}px`;
+    indicator.style.width = `${indicatorWidth}px`;
   }
 
   function bindSwipes(){

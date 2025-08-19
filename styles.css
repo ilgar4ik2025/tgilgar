@@ -50,16 +50,44 @@ body{
 .home-image{width:100%;max-width:300px;height:auto;border-radius:20px;margin-top:24px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
 
 .tabbar{
-  height:60px;background:var(--bg-2);border-radius:20px;display:flex;align-items:center;justify-content:space-around;padding:10px 20px
+  height:60px;
+  background:var(--bg-2);
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 16px;
+  position:relative;
+  margin:0 12px 12px 12px;
+  min-height:60px;
 }
-.tabbar{position:relative}
-.tab-indicator{position:absolute;bottom:6px;height:4px;width:36px;background:var(--brand);border-radius:2px;left:20px;transition:left .25s ease}
-.tab{width:50px;height:40px;border-radius:15px;background:var(--bg-2);color:#000;border:none;font-size:20px}
+
+.tab{
+  flex:1;
+  min-width:0;
+  height:40px;
+  border-radius:15px;
+  background:var(--bg-2);
+  color:#000;
+  border:none;
+  font-size:20px;
+  cursor:pointer;
+  transition:background-color .15s ease, transform .06s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 2px;
+}
+
+.tab:first-child{margin-left:0}
+.tab:last-child{margin-right:0}
 .tab.active{background:var(--brand)}
-.tab{cursor:pointer;transition:background-color .15s ease, transform .06s ease}
 .tab:hover{background:rgba(102,51,255,.18)}
 .tab:active{transform:scale(.96)}
 .tab:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+.tabbar{position:relative}
+.tab-indicator{position:absolute;bottom:6px;height:4px;width:36px;background:var(--brand);border-radius:2px;left:16px;transition:left .25s ease}
 
 .card{
   background:var(--bg-2);border-radius:var(--radius-20);padding:12px 10px;color:var(--fg-dim)
@@ -121,6 +149,24 @@ body{
 
 @media (max-width:420px){
   .app{max-width:100%;height:100dvh}
+}
+
+@media (max-width:380px){
+  .tabbar{padding:8px 12px;margin:0 8px 8px 8px}
+  .tab{font-size:18px;height:36px;margin:0 1px}
+  .tab-indicator{width:32px;bottom:8px}
+}
+
+@media (max-width:320px){
+  .tabbar{padding:6px 8px;margin:0 6px 6px 6px}
+  .tab{font-size:16px;height:32px;margin:0}
+  .tab-indicator{width:28px;bottom:10px}
+}
+
+@media (max-height:700px){
+  .tabbar{height:50px;min-height:50px}
+  .tab{height:36px}
+  .tab-indicator{bottom:8px}
 }
 
 
