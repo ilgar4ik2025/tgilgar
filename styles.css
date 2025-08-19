@@ -66,14 +66,13 @@ body{
   margin:0 12px 12px 12px;
   min-height:var(--tabbar-height);
   max-height:var(--tabbar-height);
-  overflow:hidden;
-  /* Принудительное обрезание для Telegram */
-  contain:layout style paint;
-  isolation:isolate;
-  /* Дополнительные исправления для iPhone */
-  -webkit-overflow-scrolling:touch;
-  -webkit-transform:translate3d(0,0,0);
-  transform:translate3d(0,0,0);
+  /* Убираем все обрезания */
+  /* overflow:hidden; */
+  /* contain:layout style paint; */
+  /* isolation:isolate; */
+  /* -webkit-overflow-scrolling:touch; */
+  /* -webkit-transform:translate3d(0,0,0); */
+  /* transform:translate3d(0,0,0); */
 }
 
 .tab{
@@ -93,8 +92,8 @@ body{
   margin:0 var(--tab-margin);
   position:relative;
   z-index:1;
-  /* Принудительное обрезание содержимого */
-  overflow:hidden;
+  /* Убираем overflow:hidden с табов */
+  /* overflow:hidden; */
   /* Исправления для эмодзи в Telegram */
   line-height:1;
   vertical-align:middle;
@@ -102,6 +101,8 @@ body{
   /* Фиксированные размеры */
   min-height:var(--tab-height);
   max-height:var(--tab-height);
+  /* Добавляем padding для иконок */
+  padding:8px 4px;
 }
 
 .tab:first-child{margin-left:0}
@@ -194,85 +195,27 @@ body{
   .tab-indicator{bottom:8px}
 }
 
-/* Специальные стили для Telegram Web App */
-@supports (-webkit-touch-callout: none) {
-  .tabbar {
-    /* iOS Safari специфичные стили */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-  
-  .tab {
-    /* Исправляем рендеринг иконок в Telegram */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-}
-
-/* Telegram Web App специфичные исправления */
+/* Специальные стили для Telegram Web App - только проверенные исправления */
 .telegram-webapp .tabbar {
-  /* Принудительно обрезаем содержимое */
-  clip-path: inset(0);
-  -webkit-clip-path: inset(0);
-  /* Дополнительные исправления для iPhone */
+  /* Исправления рендеринга для iPhone */
   -webkit-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  /* Жесткое ограничение размеров */
+  /* Жесткие ограничения размеров */
   max-height: 60px;
   min-height: 60px;
 }
 
 .telegram-webapp .tab {
-  /* Принудительное обрезание для эмодзи */
-  clip-path: inset(0);
-  -webkit-clip-path: inset(0);
-  /* Фиксированные размеры */
-  max-height: 40px;
-  min-height: 40px;
-  /* Исправления рендеринга */
+  /* Исправления рендеринга для iPhone */
   -webkit-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-}
-
-/* Специальные исправления для iPhone */
-@supports (-webkit-touch-callout: none) {
-  .tabbar {
-    /* iOS специфичные исправления */
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    /* Принудительное обрезание */
-    clip-path: inset(0);
-    -webkit-clip-path: inset(0);
-    /* Жесткие ограничения */
-    height: var(--tabbar-height) !important;
-    max-height: var(--tabbar-height) !important;
-    min-height: var(--tabbar-height) !important;
-  }
-  
-  .tab {
-    /* iOS специфичные исправления для табов */
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    /* Принудительное обрезание */
-    clip-path: inset(0);
-    -webkit-clip-path: inset(0);
-    /* Жесткие ограничения */
-    height: var(--tab-height) !important;
-    max-height: var(--tab-height) !important;
-    min-height: var(--tab-height) !important;
-  }
+  /* Фиксированные размеры */
+  max-height: var(--tab-height);
+  min-height: var(--tab-height);
 }
 
 
